@@ -18,7 +18,7 @@
 
 function startTypewriter() {
     const el   = document.getElementById('hero-typewriter');
-    const text = 'Mahasiswa Teknik Informatika Semester 4, Fakultas Teknik UNSRAT — tertarik pada pengembangan perangkat lunak dan teknologi terbaru.';
+    const text = 'Mahasiswa Teknik Informatika Semester 4, Fakultas Teknik UNSRAT — tertarik pada pengembangan perangkat lunak dan Game Developer.';
     let i = 0;
 
     el.style.opacity = '1';
