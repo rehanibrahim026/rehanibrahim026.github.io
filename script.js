@@ -1,8 +1,3 @@
-/* ─────────────────────────────────────────
-   script.js  —  Rey. Portfolio
-───────────────────────────────────────── */
-
-/* ── Intro Loader ── */
 (function () {
     const loader = document.getElementById('loader');
 
@@ -16,22 +11,11 @@
             document.body.style.overflow = '';
             document.getElementById('home').classList.add('loaded');
 
-            // Hero-actions muncul bersamaan dengan foto profil (~0.5s setelah hero loaded)
-            setTimeout(() => {
-                const actions = document.querySelector('.hero-actions');
-                if (actions) {
-                    actions.style.opacity   = '1';
-                    actions.style.transform = 'translateY(0)';
-                }
-            }, 500);
-
-            // Typewriter mulai setelah h1 selesai fadeUp (~0.4s)
             setTimeout(startTypewriter, 400);
         }, 950);
     }, 2200);
 })();
 
-/* ── Typewriter ── */
 function startTypewriter() {
     const el   = document.getElementById('hero-typewriter');
     const text = 'Mahasiswa Teknik Informatika Semester 4, Fakultas Teknik UNSRAT — tertarik pada pengembangan perangkat lunak dan teknologi terbaru.';
@@ -51,7 +35,6 @@ function startTypewriter() {
     type();
 }
 
-/* ── Scroll progress bar ── */
 const progressBar = document.getElementById('progress-bar');
 function updateProgress() {
     const scrollTop = window.scrollY;
@@ -59,7 +42,6 @@ function updateProgress() {
     progressBar.style.width = (scrollTop / docH * 100) + '%';
 }
 
-/* ── Navbar adaptif: transparan di Home, jelas di section terang ── */
 const header = document.getElementById('site-header');
 function updateHeader() {
     const home = document.getElementById('home');
@@ -71,7 +53,6 @@ function updateHeader() {
     header.classList.toggle('scrolled', window.scrollY > 20);
 }
 
-/* ── Active nav link ── */
 const sections = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('nav a');
 function updateActiveNav() {
@@ -83,7 +64,6 @@ function updateActiveNav() {
         if (scrollMid >= top && scrollMid < bottom) current = sec.id;
     });
     if (!current) {
-        // fallback: use closest section above scroll position
         sections.forEach(sec => {
             if (window.scrollY >= sec.offsetTop - 80) current = sec.id;
         });
@@ -93,21 +73,18 @@ function updateActiveNav() {
     });
 }
 
-/* ── Back-to-top ── */
 const backTop = document.getElementById('back-top');
 function updateBackTop() {
     backTop.classList.toggle('show', window.scrollY > 400);
 }
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-/* ── Scroll-reveal ── */
 const reveals = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 reveals.forEach(el => revealObserver.observe(el));
 
-/* ── Lightbox ── */
 const lightbox = document.getElementById('lightbox');
 const lbImg    = document.getElementById('lightbox-img');
 
@@ -126,7 +103,6 @@ function closeLightbox() {
     document.body.style.overflow = '';
 }
 
-/* ── Contact form validation ── */
 const feedback = document.getElementById('form-feedback');
 document.getElementById('f-submit').addEventListener('click', () => {
     const name  = document.getElementById('f-name').value.trim();
@@ -161,7 +137,6 @@ document.getElementById('f-submit').addEventListener('click', () => {
     }, 1200);
 });
 
-/* ── Combined scroll listener ── */
 window.addEventListener('scroll', () => {
     updateProgress();
     updateHeader();
@@ -171,14 +146,11 @@ window.addEventListener('scroll', () => {
 
 window.addEventListener('resize', updateHeader, { passive: true });
 
-// Jalankan sekali saat halaman dibuka, termasuk saat langsung masuk ke #gallery/#blog/#contact.
 updateProgress();
 updateHeader();
 updateActiveNav();
 updateBackTop();
 
-/* ── Soft cursor glow / spotlight ──
-   Vanilla JS, tidak memakai library atau framework. */
 (function () {
     const glow = document.createElement('div');
     glow.className = 'cursor-glow';
